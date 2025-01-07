@@ -8,7 +8,6 @@ let dialogInput = document.querySelector(".dialog-input");
 let update = document.querySelector("#update");
 let list = document.querySelector(".list");
 let dummy = document.querySelector(".dummy");
-let time = document.querySelector(".time");
 
 // date with month and day
 const now = new Date();
@@ -20,15 +19,28 @@ const nowDate = now.getDate();
 const fnlDate = `${dayNow}, ${monNow} ${nowDate}`;
 heading3.innerHTML = fnlDate;
 
-// clock with 12 hour format
-let hours = now.getHours();
-let mins = now.getMinutes();
-let period = hours <= 12 ? "AM" : "PM";
-hours = hours % 12;
-hours = hours ? hours : 12;
-mins = mins < 10 ? "0" + mins : mins;
-let fnlTIme = `${hours}:${mins} ${period}`;
-time.innerHTML = fnlTIme;
+// dynamic clock with 12 hour format
+function dynamicTime(){
+    
+    let time = document.querySelector(".time");
+    const now = new Date();
+    let hours = now.getHours();
+    let mins = now.getMinutes();
+    let period = hours <= 12 ? "AM" : "PM";
+    hours = hours % 12;
+    hours = hours ? hours : 12;
+    if (mins < 10) {
+        mins = "0" + mins;
+    } else {
+        mins = mins
+    }
+    let fnlTime = `${hours}:${mins} ${period}`;
+    console.log(fnlTime);
+    time.innerHTML = fnlTime;
+    }
+    
+    dynamicTime();
+    setInterval(dynamicTime, 30000);
 
 // opens the dialog box when the add button is clicked
 add.addEventListener("click", function(){
@@ -55,6 +67,13 @@ update.addEventListener("click", function() {
     check.type = "checkbox";
     const newlabel = document.createElement("label");
     newlabel.innerHTML = text;
+    const trash = document.createElement("button");
+    trash.className = "trashcan";
+
+    // deletes the div when the trash icon is clicked
+    trash.addEventListener("click", function() {
+        newdDiv.remove();
+    })
     
     // strikethrough the label if the checkbox is checked
     check.addEventListener("change", function() {
@@ -74,6 +93,7 @@ update.addEventListener("click", function() {
     // adds the new div to the contain div
     newdDiv.appendChild(check);
     newdDiv.appendChild(newlabel);
+    newdDiv.appendChild(trash); 
     newdDiv.className = "list";
     contain.appendChild(newdDiv);
     dialog.style.display = "none";
