@@ -65,8 +65,10 @@ update.addEventListener("click", function() {
     const newdDiv = document.createElement("div");
     const check = document.createElement("input");
     check.type = "checkbox";
+    check.setAttribute("id", "check");
     const newlabel = document.createElement("label");
     newlabel.innerHTML = text;
+    newlabel.setAttribute("for", "check");
     const trash = document.createElement("button");
     trash.className = "trashcan";
 
@@ -85,8 +87,10 @@ update.addEventListener("click", function() {
     });
 
     // checks the checkbox when the div is clicked
-    newdDiv.addEventListener("click", function() {
-        check.checked = !check.checked;
+    newdDiv.addEventListener("click", function(event) {
+        if (event.target == newdDiv) {
+            check.checked = !check.checked;
+        }
         check.dispatchEvent(new Event('change'));
     });
 
