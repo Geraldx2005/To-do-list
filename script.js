@@ -74,7 +74,7 @@ dialog.addEventListener("click", function (event) {
 // creates a new div element with a checkbox and a label
 update.addEventListener("click", function () {
   const text = dialogInput.value;
-  const newdDiv = document.createElement("div");
+  const newDiv = document.createElement("div");
   const check = document.createElement("input");
   check.type = "checkbox";
   const newlabel = document.createElement("label");
@@ -92,7 +92,7 @@ update.addEventListener("click", function () {
 
   // deletes the div when the trash icon is clicked
   trash.addEventListener("click", function () {
-    newdDiv.remove();
+    newDiv.remove();
   });
 
   // strikethrough the label if the checkbox is checked
@@ -105,19 +105,19 @@ update.addEventListener("click", function () {
   });
 
   // checks the checkbox when the div is clicked
-  newdDiv.addEventListener("click", function (event) {
-    if (event.target == newdDiv) {
+  newDiv.addEventListener("click", function (event) {
+    if (event.target == newDiv) {
       check.checked = !check.checked;
     }
     check.dispatchEvent(new Event("change"));
   });
 
   // adds the new div to the contain div
-  newdDiv.appendChild(check);
-  newdDiv.appendChild(newlabel);
-  newdDiv.appendChild(trash);
-  newdDiv.className = "list";
-  contain.appendChild(newdDiv);
+  newDiv.appendChild(check);
+  newDiv.appendChild(newlabel);
+  newDiv.appendChild(trash);
+  newDiv.className = "list";
+  contain.appendChild(newDiv);
   dialog.style.display = "none";
   dialogInput.value = "";
   dummy.style.display = "none";
