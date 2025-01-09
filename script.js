@@ -13,20 +13,7 @@ let dummy = document.querySelector(".dummy");
 const now = new Date();
 const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const dayNow = day[now.getDay()];
-const month = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+const month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 const monNow = month[now.getMonth()];
 const nowDate = now.getDate();
 const fnlDate = `${dayNow}, ${monNow} ${nowDate}`;
