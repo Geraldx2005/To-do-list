@@ -69,6 +69,8 @@ update.addEventListener("click", function () {
   const trash = document.createElement("button");
   trash.className = "trashcan";
 
+  contain.style.visibility = "visible";
+
   //checks the checkbox when label is clicked
   newlabel.addEventListener("click", function (event) {
     if ((event.target = newlabel)) {
@@ -79,6 +81,7 @@ update.addEventListener("click", function () {
 
   // deletes the div when the trash icon is clicked
   trash.addEventListener("click", function () {
+    contain.style.visibility = "hidden";
     newDiv.remove();
   });
 
