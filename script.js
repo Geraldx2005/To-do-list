@@ -13,7 +13,20 @@ let dummy = document.querySelector(".dummy");
 const now = new Date();
 const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const dayNow = day[now.getDay()];
-const month = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const month = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sep",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 const monNow = month[now.getMonth()];
 const nowDate = now.getDate();
 const fnlDate = `${dayNow}, ${monNow} ${nowDate}`;
@@ -69,8 +82,6 @@ update.addEventListener("click", function () {
   const trash = document.createElement("button");
   trash.className = "trashcan";
 
-  contain.style.visibility = "visible";
-
   //checks the checkbox when label is clicked
   newlabel.addEventListener("click", function (event) {
     if ((event.target = newlabel)) {
@@ -81,7 +92,6 @@ update.addEventListener("click", function () {
 
   // deletes the div when the trash icon is clicked
   trash.addEventListener("click", function () {
-    contain.style.visibility = "hidden";
     newDiv.remove();
   });
 
