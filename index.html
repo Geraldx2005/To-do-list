@@ -12,6 +12,7 @@
 <body>
     <header>
         <h1>TO DO LIST</h1>
+        <button class="toggle"></button>
     </header>
     <div class="wrap">
         <div class="heading">
@@ -22,18 +23,14 @@
             <div class="dummy">Yout tasks will appear here...</div>
         </div>
     </div>
-    <button class="add">
-        <img class="plus" src="plus dark.svg" alt="add">
-    </button>
+    <button class="add"></button>
 
     <div class="dialog">
         <div class="dialog-content">
-            <span class="close-btn">
-                <img class="cross" src="cross dark.svg" alt="close">
-            </span>
+            <span class="close-btn"></span>
             <p>Add task or list...</p>
             <textarea class="dialog-input" name="user-task"  placeholder="Write your task here"></textarea>
-             <button id="update">Add task</button>
+             <button class="update">Add task</button>
         </div>
     </div>
     <script src="script.js"></script>

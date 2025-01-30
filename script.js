@@ -1,32 +1,85 @@
 let heading3 = document.querySelector("h3");
+let wrap = document.querySelector(".wrap");
+let header = document.querySelector("header");
+let body = document.querySelector("body");
+let time = document.querySelector(".time");
 let contain = document.querySelector(".contain");
 let add = document.querySelector(".add");
 let dialog = document.querySelector(".dialog");
 let close = document.querySelector(".close-btn");
 let dialogContent = document.querySelector(".dialog-content");
 let dialogInput = document.querySelector(".dialog-input");
-let update = document.querySelector("#update");
-let list = document.querySelector(".list");
+let update = document.querySelector(".update");
 let dummy = document.querySelector(".dummy");
+let list = document.querySelectorAll(".list");
+let toggle = document.querySelector(".toggle");
+
+// light to dark mode toggle
+let force = 0;
+toggle.addEventListener("click", function () {
+  let list = document.querySelectorAll(".list");
+
+  if (force == 0) {
+    list.forEach((item) => {
+      item.querySelector(".trashcan").style.backgroundImage =
+        "url('dark-trash.svg')";
+      item
+        .querySelector("input[type='checkbox'")
+        .style.setProperty("--check-color", "whitesmoke");
+      item.querySelector("input[type='checkbox']").style.borderColor =
+        "whitesmoke";
+      item.querySelector("label").style.color = "whitesmoke";
+      item.classList.add("dark-list");
+    });
+    contain.classList.toggle("dark-contain");
+    wrap.classList.toggle("dark-wrap");
+    header.classList.toggle("dark-header");
+    body.classList.toggle("dark-body");
+    heading3.classList.toggle("dark-h3");
+    time.classList.toggle("dark-time");
+    add.classList.toggle("dark-add");
+    dialogInput.classList.toggle("dark-dialog-input");
+    dialogContent.classList.toggle("dark-dialog-content");
+    update.classList.toggle("dark-update");
+    dummy.classList.toggle("dark-dummy");
+    close.classList.toggle("dark-close-btn");
+    toggle.classList.toggle("dark-toggle");
+
+    force = 1;
+  } else if (force == 1) {
+    list.forEach((item) => {
+      item.querySelector(".trashcan").style.backgroundImage =
+        "url('Trash.svg')";
+      item
+        .querySelector("input[type='checkbox'")
+        .style.setProperty("--check-color", "#4f4f4f");
+      item.querySelector("input[type='checkbox']").style.borderColor =
+        "#4f4f4f";
+      item.querySelector("label").style.color = "#4f4f4f";
+      item.classList.remove("dark-list");
+    });
+    contain.classList.toggle("dark-contain");
+    wrap.classList.toggle("dark-wrap");
+    body.classList.toggle("dark-body");
+    header.classList.toggle("dark-header");
+    time.classList.toggle("dark-time");
+    heading3.classList.toggle("dark-h3");
+    dialogContent.classList.toggle("dark-dialog-content");
+    add.classList.toggle("dark-add");
+    dialogInput.classList.toggle("dark-dialog-input");
+    dummy.classList.toggle("dark-dummy");
+    update.classList.toggle("dark-update");
+    close.classList.toggle("dark-close-btn");
+    toggle.classList.toggle("dark-toggle");
+    force = 0;
+  }
+});
 
 // date with month and day
 const now = new Date();
 const day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const dayNow = day[now.getDay()];
-const month = [
-  "Jan",
-  "Feb",
-  "Mar",
-  "Apr",
-  "May",
-  "Jun",
-  "Jul",
-  "Aug",
-  "Sep",
-  "Oct",
-  "Nov",
-  "Dec",
-];
+const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const monNow = month[now.getMonth()];
 const nowDate = now.getDate();
 const fnlDate = `${dayNow}, ${monNow} ${nowDate}`;
@@ -34,7 +87,6 @@ heading3.innerHTML = fnlDate;
 
 // dynamic clock with 12 hour format
 function dynamicTime() {
-  let time = document.querySelector(".time");
   const now = new Date();
   let hours = now.getHours();
   let mins = now.getMinutes();
@@ -47,7 +99,6 @@ function dynamicTime() {
     mins = mins;
   }
   let fnlTime = `${hours}:${mins} ${period}`;
-  console.log(fnlTime);
   time.innerHTML = fnlTime;
 }
 
@@ -121,4 +172,45 @@ update.addEventListener("click", function () {
   dialog.style.display = "none";
   dialogInput.value = "";
   dummy.style.display = "none";
+
+  let list = document.querySelectorAll(".list");
+
+  if (force == 1) {
+    list.forEach((item) => {
+      item
+        .querySelector("input[type='checkbox']")
+        .style.setProperty("--check-color", "whitesmoke");
+      item.querySelector(".trashcan").style.backgroundImage =
+        "url('dark-trash.svg')";
+      item.querySelector("input[type='checkbox']").style.borderColor =
+        "whitesmoke";
+      item.querySelector("label").style.color = "whitesmoke";
+      item.classList.add("dark-list");
+    });
+  } else {
+    list.forEach((item) => {
+      item
+        .querySelector("input[type='checkbox'")
+        .style.setProperty("--check-color", "#4f4f4f");
+      item.querySelector(".trashcan").style.backgroundImage =
+        "url('Trash.svg')";
+      item.querySelector("input[type='checkbox']").style.borderColor =
+        "#4f4f4f";
+      item.querySelector("label").style.color = "#4f4f4f";
+      item.classList.remove("dark-list");
+    });
+  }
 });
+
+//bringing back dummy div when there is no child in the contain div
+const observer = new MutationObserver(function (mutationsList, observer) {
+  for (let mutation of mutationsList) {
+    if (mutation.type === "childList") {
+      if (contain.children.length == 1) {
+        dummy.style.display = "flex";
+      }
+    }
+  }
+});
+
+observer.observe(contain, { childList: true });
